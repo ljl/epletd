@@ -1,6 +1,6 @@
 function Enemy() {
     this.name;
-    this.shape;
+    this.shapeObject;
     this.color;
     this.reward;
     this.penalty;
@@ -31,7 +31,6 @@ function createEnemy(enemyType) {
     // Load all config
     enemy = new Enemy();
     enemy.name = config.name;
-    enemy.shape = config.shape;
     enemy.color = config.color;
     enemy.reward = config.reward;
     enemy.penalty = config.penalty;
@@ -41,4 +40,15 @@ function createEnemy(enemyType) {
     enemy.friction = config.friction;
     enemy.restitution = config.restitution;
     enemy.health = config.health;
+
+    // Create shape
+    switch (config.shape) {
+        case 'circle':
+            enemy.shapeObject = new iio.Circle();
+            enemy.shapeObject.parent = enemy;
+            break;
+    }
+
+    // Return that shit mothafucka!
+    return enemy;
 }
