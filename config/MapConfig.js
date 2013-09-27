@@ -1,6 +1,6 @@
 MapConfig = {
-    "cols": 10,
-    "rows": 20,
+    "cols": 20,
+    "rows": 40,
     "cell": {
         "x": 32,
         "y": 32
