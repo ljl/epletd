@@ -2,7 +2,7 @@ EnemyConfig = {
     "normal": {
         "name": "Normal",
         "shape": "circle",
-        "color": "blue"
+        "color": "blue",
         "reward": 5,
         "penalty": 5,
         "density": 0.5,
