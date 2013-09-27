@@ -4,6 +4,7 @@ EpleTD = function(io) {
 
     io.canvas.addEventListener('mousedown', function(event){
         console.log(io.getEventPosition(event));
+
     });
 
 };
