@@ -1,5 +1,5 @@
 EpleTD = function(io) {
-    var map = new Map();
+    var map = new Map(MapConfig);
     io.addObj(map.grid);
 }
 
