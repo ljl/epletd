@@ -51,6 +51,14 @@ EpleTD = function (io) {
     var listener = new Box2D.Dynamics.b2ContactListener;
     listener.BeginContact = function(contact) {
         //console.log(contact.GetFixtureB().GetBody().parent);
+        var fixA = contact.GetFixtureA();
+        var fixB = contact.GetFixtureB();
+        if (fixA.GetBody().parent.type == 'projectile' || fixB.GetBody().parent.type == 'projectile') {
+            if (fixA.GetBody().parent.type == 'enemy' || fixB.GetBody().parent.type == 'enemy') {
+                //io.rmvObj(fixA.GetBody());
+                //io.rmvObj(fixB.GetBody());
+            }
+        }
     };
 
     world.SetContactListener(listener);

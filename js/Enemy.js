@@ -1,4 +1,5 @@
 function Enemy(x, y, config) {
+    this.type = 'enemy';
     this.name        = config.name;
     this.reward      = config.reward;
     this.penalty     = config.penalty;

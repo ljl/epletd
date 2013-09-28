@@ -1,4 +1,5 @@
 function Projectile(x, y, config, targetEnemy) {
+    this.type = "projectile";
     this.config = config;
     this.targetEnemy = targetEnemy;
     this.speed = config.speed;
