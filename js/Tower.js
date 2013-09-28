@@ -16,11 +16,23 @@ function Tower(x, y, config) {
     }
 
     this.fire = function() {
+        var x = toPixels(this.body.GetPosition().x);
+        var y = toPixels(this.body.GetPosition().y);
         // Find closest enemy
         var enemies = TD.io.getGroup('enemies');
+        var closestEnemy = null;
+        var closestDistance = 10000;
         enemies.forEach(function(enemy, index) {
-                        
+            var distance = getDistance(x, y, toPixels(enemy.GetPosition().x), toPixels(enemy.GetPosition().y));
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestEnemy = enemy;
+            }
         });
-        new Projectile(this.x, this.y, this.config.projectile, targetEnemy);
+        new Projectile(x, y, this.config.projectile, closestEnemy);
     };
+}
+
+function getDistance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
