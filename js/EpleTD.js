@@ -26,33 +26,9 @@ EpleTD = function (io) {
 
     io.canvas.addEventListener('mousedown', function (event) {
         var pos = map.getCellCenter(io.getEventPosition(event));
-        //io.addObj(new Tower(pos, TowerConfig.basic).shape);
-
-        var fixDef = new b2FixtureDef;
-        fixDef.density = 1.0;
-        fixDef.friction = 0.1;
-        fixDef.restitution = 0.8;
-        fixDef.shape = new b2CircleShape(toMeters(10));
-        //fixDef.shape.SetAsBox(toMeters(16), toMeters(16));
-
-
-        //Define a body
-        var bodyDef = new b2BodyDef;
-        bodyDef.type = b2Body.b2_dynamicBody;
-        bodyDef.position.Set(toMeters(pos.x), toMeters(pos.y));
-
-        //Create the body
-        var body = world.CreateBody(bodyDef);
-        body.ApplyTorque(8);
-
-        //Create the fixture
-        var fixture = body.CreateFixture(fixDef);
-        fixture.GetShape()
-            .prepGraphics(io.b2Scale)
-            .setFillStyle('red');
-
-        io.addObj(body);
-
+        
+        var enemy = new Enemy(pos.x, pos.y, world, io, EnemyConfig.normal);
+        io.addObj(enemy.body);
     });
 
 
