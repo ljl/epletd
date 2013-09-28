@@ -6,6 +6,6 @@ function Enemy(x, y, world, io, config) {
     this.damping     = config.damping;
     this.health      = config.health;
 
-    this.body = TD.createBox2DBody(x, y, config);
+    this.body = TD.createBox2DBody(x, y, config.box2d);
     this.body.parent = this;
 }

@@ -6,42 +6,6 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
     , b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
     , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 
-var TD = {
-    io: {},
-    world: {},
-    map: {},
-    createBox2DBody: function (x, y, config) {
-        var fixDef = new b2FixtureDef;
-        fixDef.density = config.density;
-        fixDef.friction = config.friction;
-        fixDef.restitution = config.restitution;
-
-        switch (config.shape) {
-        case 'circle':
-            fixDef.shape = new b2CircleShape(toMeters(16));
-            break;
-        case 'square':
-            fixDef.shape = new b2PolygonShape;
-            fixDef.shape.SetAsBox(toMeters(16), toMeters(16));
-            break;
-        }
-
-        var bodyDef;
-        bodyDef = new b2BodyDef;
-        bodyDef.type = b2Body.b2_dynamicBody;
-        bodyDef.position.Set(toMeters(x), toMeters(y));
-
-        var body = TD.world.CreateBody(bodyDef);
-
-        var fixture = body.CreateFixture(fixDef);
-        fixture.GetShape()
-            .prepGraphics(TD.io.b2Scale)
-            .setFillStyle(config.color);
-
-        return body;
-    }
-};
-
 EpleTD = function (io) {
     // Make io accessible to all classes
     TD.io = io;
@@ -59,7 +23,9 @@ EpleTD = function (io) {
         //code called 60x a second
     });
 
-    createStatics(io, world, 32 * 5 - 15, 32 * 5 - 15);
+    var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
+    io.addObj(t.body);
+    //createStatics(io, world, 32 * 5 - 15, 32 * 5 - 15);
     createStatics(io, world, 32 * 6 - 15, 32 * 6 - 15);
     createStatics(io, world, 32 * 7 - 15, 32 * 7 - 15);
     createStatics(io, world, 32 * 8 - 15, 32 * 8 - 15);
