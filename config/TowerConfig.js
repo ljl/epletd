@@ -1,6 +1,6 @@
 TowerConfig = {
     "basic": {
-        "size": 10,
+        "fireInterval": 2000,
         "box2d": {
             "size": 10,
             "density": 0.5,
@@ -9,7 +9,7 @@ TowerConfig = {
             "restitution": 0.1,
             "shape": "square",
             "color": "red",
-            type: "static"
+            "type": "static"
         },
         "projectile": {
             "damage": 10,
@@ -23,7 +23,7 @@ TowerConfig = {
                 "restitution": 0.1,
                 "shape": "circle",
                 "color": "black",
-                type: "kinematic"
+                "type": "kinematic"
             }
 
         }

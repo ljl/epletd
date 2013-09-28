@@ -20,20 +20,26 @@ EpleTD = function (io) {
 
     // Add groups
     io.addGroup('enemies', 1);
+    io.addGroup('towers', 2);
+    io.addGroup('projectiles', 3);
 
 
     io.setB2Framerate(60, function () {
         //code called 60x a second
+        var towers = TD.io.getGroup('towers');
+        towers.forEach(function(tower){
+            tower.parent.update();
+        });
     });
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
-    io.addObj(t.body);
+    io.addToGroup('towers', t.body);
     t = new Tower(32 * 6 - 15, 32 * 6 - 15, TowerConfig.basic);
-    io.addObj(t.body);
+    io.addToGroup('towers', t.body);
     t = new Tower(32 * 7 - 15, 32 * 7 - 15, TowerConfig.basic);
-    io.addObj(t.body);
+    io.addToGroup('towers', t.body);
     t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.basic);
-    io.addObj(t.body);
+    io.addToGroup('towers', t.body);
 
 
     // Contact listener
