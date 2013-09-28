@@ -26,20 +26,29 @@ EpleTD = function (io) {
 
 
     // Create walls
-    var wall = TD.createBox2DBody(0, 0, {
+    var wall = TD.createBox2DBody(MapConfig.cell.x/2, 0, {
         "shape": "wall",
         "type": "static",
-        "width": MapConfig.cell.x,
+        "width": MapConfig.cell.x/2,
         "height": MapConfig.cell.y * MapConfig.rows,
         "color": "grey"
     });
     io.addToGroup('wall', wall);
 
-    wall = TD.createBox2DBody((MapConfig.cell.x * MapConfig.cols), 0, {
+    wall = TD.createBox2DBody((MapConfig.cell.x * MapConfig.cols) - MapConfig.cell.x/2, 0, {
         "shape": "wall",
         "type": "static",
-        "width": MapConfig.cell.x / 2,
+        "width": MapConfig.cell.x/2,
         "height": MapConfig.cell.y * MapConfig.rows,
+        "color": "grey"
+    });
+    io.addToGroup('wall', wall);
+
+    wall = TD.createBox2DBody(0, (MapConfig.cell.y * MapConfig.rows/2), {
+        "shape": "wall",
+        "type": "static",
+        "width": (MapConfig.cell.x * MapConfig.cols),
+        "height": MapConfig.cell.y/2,
         "color": "grey"
     });
     io.addToGroup('wall', wall);
