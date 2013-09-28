@@ -67,6 +67,8 @@ EpleTD = function (io) {
     t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.sniper);
     io.addToGroup('towers', t.body);
 
+    // Set walls etc
+
 
     // Contact listener
     var listener = new Box2D.Dynamics.b2ContactListener;
