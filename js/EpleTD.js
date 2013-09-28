@@ -6,14 +6,25 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
     , b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
     , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 
+var TD = {
+    io: {},
+    world: {},
+    map: {}
+};
+
 EpleTD = function (io) {
-    var map = new Map(MapConfig);
+    // Make io accessible to all classes
+    TD.io = io;
+
+    // Create map and add to canvas
+    var map = TD.map = new Map(MapConfig);
     io.addObj(map.grid);
 
-    var world = new b2World(new b2Vec2(0, 3), true);
-
-
+    // Create box2d world
+    var world = TD.world = new b2World(new b2Vec2(0, 3), true);
     io.addB2World(world);
+
+
 
     io.setB2Framerate(60, function () {
         //code called 60x a second
@@ -30,8 +41,6 @@ EpleTD = function (io) {
         var enemy = new Enemy(pos.x, pos.y, world, io, EnemyConfig.normal);
         io.addObj(enemy.body);
     });
-
-
 };
 
 

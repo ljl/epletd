@@ -1,4 +1,4 @@
-function Tower(vector, config) {
+function Tower(x, y, world, io, config) {
     this.config = config;
     this.shape = new iio.Circle(vector, config.size);
     this.shape.setFillStyle(config.color);
@@ -6,8 +6,6 @@ function Tower(vector, config) {
     this.fire = function(target) {
         new Projectile(this.config.projectile);
     }
-}
 
-function placeTower() {
-
+    EpleTD.createShape();
 }
