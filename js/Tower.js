@@ -19,6 +19,7 @@ function Tower(x, y, config) {
     this.fire = function() {
         var x = toPixels(this.body.GetPosition().x);
         var y = toPixels(this.body.GetPosition().y);
+        
         // Find closest enemy
         var enemies = TD.io.getGroup('enemies');
         var closestEnemy = null;
@@ -30,6 +31,8 @@ function Tower(x, y, config) {
                 closestEnemy = enemy;
             }
         });
+
+        // Did we even find an enemy?
         if (closestEnemy) {
             var projectile = new Projectile(x, y, this.config.projectile, closestEnemy.parent);
             TD.io.addToGroup('projectiles', projectile.body);
