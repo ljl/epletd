@@ -41,9 +41,9 @@ EpleTD = function (io) {
     io.addToGroup('towers', t.body);
     t = new Tower(32 * 6 - 15, 32 * 6 - 15, TowerConfig.basic);
     io.addToGroup('towers', t.body);
-    t = new Tower(32 * 7 - 15, 32 * 7 - 15, TowerConfig.basic);
+    t = new Tower(32 * 7 - 15, 32 * 7 - 15, TowerConfig.sniper);
     io.addToGroup('towers', t.body);
-    t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.basic);
+    t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.sniper);
     io.addToGroup('towers', t.body);
 
 

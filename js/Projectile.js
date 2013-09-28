@@ -9,6 +9,12 @@ function Projectile(x, y, config, targetEnemy) {
     this.body.parent = this;
 
     this.update = function() {
+        // Lets remove ourselves if enemy is dead.
+        if (this.targetEnemy.health <= 0) {
+            TD.io.rmvObj(this.body);
+        }
+
+        // Update position based on target enemy
         var x = this.body.GetPosition().x;
         var y = this.body.GetPosition().y;
         var targetX = this.targetEnemy.body.GetPosition().x;

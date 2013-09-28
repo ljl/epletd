@@ -1,6 +1,7 @@
 function Tower(x, y, config) {
     this.config = config;
     this.fireInterval = config.fireInterval;
+    this.range = config.range;
     this.lastShot = new Date().getTime();
 
 
@@ -33,7 +34,7 @@ function Tower(x, y, config) {
         });
 
         // Did we even find an enemy?
-        if (closestEnemy) {
+        if (closestEnemy && closestDistance <= this.range) {
             var projectile = new Projectile(x, y, this.config.projectile, closestEnemy.parent);
             TD.io.addToGroup('projectiles', projectile.body);
         }
