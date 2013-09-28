@@ -3,6 +3,7 @@ function Projectile(x, y, config, targetEnemy) {
     this.config = config;
     this.targetEnemy = targetEnemy;
     this.speed = config.speed;
+    this.damage = config.damage;
 
     this.body = TD.createBox2DBody(x, y, config.box2d);
     this.body.parent = this;
@@ -17,4 +18,9 @@ function Projectile(x, y, config, targetEnemy) {
         velocity.Multiply(this.speed);
         this.body.SetLinearVelocity(velocity);
     };
+
+    this.hit = function(enemy) {
+        enemy.applyDamage(this.damage);
+        TD.io.rmvObj(this.body);
+    }
 }

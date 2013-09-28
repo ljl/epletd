@@ -15,7 +15,7 @@ TowerConfig = {
             "damage": 10,
             "size": 2,
             "color": "black",
-            "speed": 20,
+            "speed": 10,
             "box2d": {
                 "mass": 0.1,
                 "size": 2,

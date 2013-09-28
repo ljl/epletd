@@ -27,12 +27,12 @@ EpleTD = function (io) {
     io.setB2Framerate(60, function () {
         //code called 60x a second
         var towers = TD.io.getGroup('towers');
-        towers.forEach(function(tower){
+        towers.forEach(function (tower) {
             tower.parent.update();
         });
 
         var projectiles = TD.io.getGroup('projectiles');
-        projectiles.forEach(function(projectile){
+        projectiles.forEach(function (projectile) {
             projectile.parent.update();
         });
     });
@@ -49,16 +49,19 @@ EpleTD = function (io) {
 
     // Contact listener
     var listener = new Box2D.Dynamics.b2ContactListener;
-    listener.BeginContact = function(contact) {
+    listener.BeginContact = function (contact) {
         //console.log(contact.GetFixtureB().GetBody().parent);
         var fixA = contact.GetFixtureA();
         var fixB = contact.GetFixtureB();
-        if (fixA.GetBody().parent.type == 'projectile' || fixB.GetBody().parent.type == 'projectile') {
-            if (fixA.GetBody().parent.type == 'enemy' || fixB.GetBody().parent.type == 'enemy') {
-                //io.rmvObj(fixA.GetBody());
-                //io.rmvObj(fixB.GetBody());
-            }
+        var classA = fixA.GetBody().parent;
+        var classB = fixB.GetBody().parent;
+        if (classA.type == 'projectile' && classB.type == 'enemy') {
+            classA.hit(classB);
         }
+        if (classA.type == 'enemy' && classB.type == 'projectile') {
+            classB.hit(classA);
+        }
+
     };
 
     world.SetContactListener(listener);
@@ -71,7 +74,6 @@ EpleTD = function (io) {
         io.addToGroup('enemies', enemy.body);
     });
 };
-
 
 
 iio.start(EpleTD);

@@ -10,5 +10,8 @@ function Enemy(x, y, config) {
 
     this.applyDamage = function(damage) {
         this.health -= damage;
+        if (this.health <= 0) {
+            TD.io.rmvObj(this.body);
+        }
     }
 }
