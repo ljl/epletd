@@ -12,12 +12,18 @@ var TD = {
     io: {},
     world: {},
     map: {},
-    createBox2DBody: function (x, y, config) {
+    createBox2DBody: function (x, y, config, filter) {
         var fixDef = new b2FixtureDef;
         fixDef.density = config.density;
         fixDef.friction = config.friction;
         fixDef.restitution = config.restitution;
         fixDef.mass = config.mass;
+        if (filter) {
+            fixDef.filter.categoryBits = filter.cat;
+            fixDef.filter.maskBits = filter.mask;
+        }
+
+
 
         switch (config.shape) {
         case 'circle':

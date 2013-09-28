@@ -5,7 +5,7 @@ function Projectile(x, y, config, targetEnemy) {
     this.speed = config.speed;
     this.damage = config.damage;
 
-    this.body = TD.createBox2DBody(x, y, config.box2d);
+    this.body = TD.createBox2DBody(x, y, config.box2d, {cat: 1, mask: 2});
     this.body.parent = this;
 
     this.update = function() {

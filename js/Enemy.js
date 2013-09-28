@@ -5,7 +5,7 @@ function Enemy(x, y, config) {
     this.penalty     = config.penalty;
     this.health      = config.health;
 
-    this.body = TD.createBox2DBody(x, y, config.box2d);
+    this.body = TD.createBox2DBody(x, y, config.box2d, {cat:2, mask:1});
     this.body.parent = this;
 
     this.applyDamage = function(damage) {
