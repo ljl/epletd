@@ -1,4 +1,4 @@
-function Enemy(x, y, world, io, config) {
+function Enemy(x, y, config) {
     this.name        = config.name;
     this.color       = config.color;
     this.reward      = config.reward;

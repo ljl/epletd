@@ -25,51 +25,22 @@ EpleTD = function (io) {
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
     io.addObj(t.body);
-    //createStatics(io, world, 32 * 5 - 15, 32 * 5 - 15);
-    createStatics(io, world, 32 * 6 - 15, 32 * 6 - 15);
-    createStatics(io, world, 32 * 7 - 15, 32 * 7 - 15);
-    createStatics(io, world, 32 * 8 - 15, 32 * 8 - 15);
+    t = new Tower(32 * 6 - 15, 32 * 6 - 15, TowerConfig.basic);
+    io.addObj(t.body);
+    t = new Tower(32 * 7 - 15, 32 * 7 - 15, TowerConfig.basic);
+    io.addObj(t.body);
+    t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.basic);
+    io.addObj(t.body);
+
 
     io.canvas.addEventListener('mousedown', function (event) {
         var pos = map.getCellCenter(io.getEventPosition(event));
 
-        var enemy = new Enemy(pos.x, pos.y, world, io, EnemyConfig.normal);
+        var enemy = new Enemy(pos.x, pos.y, EnemyConfig.normal);
         io.addObj(enemy.body);
     });
 };
 
 
-function createStatics(io, world, x, y) {
-    var fixDef = new b2FixtureDef;
-    fixDef.density = 1.0;
-    fixDef.friction = 0.1;
-    fixDef.restitution = 0.5;
-    fixDef.shape = new b2PolygonShape;
-    fixDef.shape.SetAsBox(toMeters(16), toMeters(16));
-
-    //Define a body
-    var bodyDef = new b2BodyDef;
-    bodyDef.type = b2Body.b2_staticBody;
-    bodyDef.position.Set(toMeters(x), toMeters(y));
-
-    //Create the body
-    var body = world.CreateBody(bodyDef);
-
-    //Create the fixture
-    var fixture = body.CreateFixture(fixDef);
-    fixture.GetShape()
-        .prepGraphics(io.b2Scale)
-        .setFillStyle('blue');
-
-    io.addObj(body);
-}
-
-function toMeters(val) {
-    return val / 30;
-}
-
-function toPixels(val) {
-    return val * 30;
-}
 
 iio.start(EpleTD);

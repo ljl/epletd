@@ -5,6 +5,8 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
     , b2World = Box2D.Dynamics.b2World
     , b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
     , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+
+
 //Global vars/functions
 var TD = {
     io: {},
@@ -18,11 +20,11 @@ var TD = {
 
         switch (config.shape) {
         case 'circle':
-            fixDef.shape = new b2CircleShape(toMeters(16));
+            fixDef.shape = new b2CircleShape(toMeters(config.size));
             break;
         case 'square':
             fixDef.shape = new b2PolygonShape;
-            fixDef.shape.SetAsBox(toMeters(16), toMeters(16));
+            fixDef.shape.SetAsBox(toMeters(config.size), toMeters(config.size));
             break;
         }
 
@@ -52,3 +54,11 @@ var TD = {
         return body;
     }
 };
+
+function toMeters(val) {
+    return val / 30;
+}
+
+function toPixels(val) {
+    return val * 30;
+}
