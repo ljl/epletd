@@ -18,6 +18,9 @@ EpleTD = function (io) {
     var world = TD.world = new b2World(new b2Vec2(0, 3), true);
     io.addB2World(world);
 
+    // Add groups
+    io.addGroup('enemies', 1);
+
 
     io.setB2Framerate(60, function () {
         //code called 60x a second
@@ -46,7 +49,7 @@ EpleTD = function (io) {
         var pos = map.getCellCenter(io.getEventPosition(event));
 
         var enemy = new Enemy(pos.x, pos.y, EnemyConfig.normal);
-        io.addObj(enemy.body);
+        io.addToGroup('enemies', enemy.body);
     });
 };
 
