@@ -23,8 +23,6 @@ var TD = {
             fixDef.filter.maskBits = filter.mask;
         }
 
-
-
         switch (config.shape) {
         case 'circle':
             fixDef.shape = new b2CircleShape(toMeters(config.size));
@@ -32,6 +30,10 @@ var TD = {
         case 'square':
             fixDef.shape = new b2PolygonShape;
             fixDef.shape.SetAsBox(toMeters(config.size), toMeters(config.size));
+            break;
+        case 'wall':
+            fixDef.shape = new b2PolygonShape;
+            fixDef.shape.SetAsBox(toMeters(config.width), toMeters(config.height));
             break;
         }
 

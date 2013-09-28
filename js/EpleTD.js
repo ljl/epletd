@@ -22,6 +22,27 @@ EpleTD = function (io) {
     io.addGroup('enemies', 1);
     io.addGroup('towers', 2);
     io.addGroup('projectiles', 3);
+    io.addGroup('wall', 3);
+
+
+    // Create walls
+    var wall = TD.createBox2DBody(0, 0, {
+        "shape": "wall",
+        "type": "static",
+        "width": MapConfig.cell.x,
+        "height": MapConfig.cell.y * MapConfig.rows,
+        "color": "grey"
+    });
+    io.addToGroup('wall', wall);
+
+    wall = TD.createBox2DBody((MapConfig.cell.x * MapConfig.cols), 0, {
+        "shape": "wall",
+        "type": "static",
+        "width": MapConfig.cell.x / 2,
+        "height": MapConfig.cell.y * MapConfig.rows,
+        "color": "grey"
+    });
+    io.addToGroup('wall', wall);
 
 
     io.setB2Framerate(60, function () {
@@ -55,11 +76,13 @@ EpleTD = function (io) {
         var fixB = contact.GetFixtureB();
         var classA = fixA.GetBody().parent;
         var classB = fixB.GetBody().parent;
-        if (classA.type == 'projectile' && classB.type == 'enemy') {
-            classA.hit(classB);
-        }
-        if (classA.type == 'enemy' && classB.type == 'projectile') {
-            classB.hit(classA);
+        if (classA && classB) {
+            if (classA.type == 'projectile' && classB.type == 'enemy') {
+                classA.hit(classB);
+            }
+            if (classA.type == 'enemy' && classB.type == 'projectile') {
+                classB.hit(classA);
+            }
         }
 
     };
