@@ -9,7 +9,37 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
 var TD = {
     io: {},
     world: {},
-    map: {}
+    map: {},
+    createBox2DBody: function (x, y, config) {
+        var fixDef = new b2FixtureDef;
+        fixDef.density = config.density;
+        fixDef.friction = config.friction;
+        fixDef.restitution = config.restitution;
+
+        switch (config.shape) {
+        case 'circle':
+            fixDef.shape = new b2CircleShape(toMeters(16));
+            break;
+        case 'square':
+            fixDef.shape = new b2PolygonShape;
+            fixDef.shape.SetAsBox(toMeters(16), toMeters(16));
+            break;
+        }
+
+        var bodyDef;
+        bodyDef = new b2BodyDef;
+        bodyDef.type = b2Body.b2_dynamicBody;
+        bodyDef.position.Set(toMeters(x), toMeters(y));
+
+        var body = TD.world.CreateBody(bodyDef);
+
+        var fixture = body.CreateFixture(fixDef);
+        fixture.GetShape()
+            .prepGraphics(TD.io.b2Scale)
+            .setFillStyle(config.color);
+
+        return body;
+    }
 };
 
 EpleTD = function (io) {
@@ -25,19 +55,18 @@ EpleTD = function (io) {
     io.addB2World(world);
 
 
-
     io.setB2Framerate(60, function () {
         //code called 60x a second
     });
 
-    createStatics(io, world, 32*5-15, 32*5-15);
-    createStatics(io, world, 32*6-15, 32*6-15);
-    createStatics(io, world, 32*7-15, 32*7-15);
-    createStatics(io, world, 32*8-15, 32*8-15);
+    createStatics(io, world, 32 * 5 - 15, 32 * 5 - 15);
+    createStatics(io, world, 32 * 6 - 15, 32 * 6 - 15);
+    createStatics(io, world, 32 * 7 - 15, 32 * 7 - 15);
+    createStatics(io, world, 32 * 8 - 15, 32 * 8 - 15);
 
     io.canvas.addEventListener('mousedown', function (event) {
         var pos = map.getCellCenter(io.getEventPosition(event));
-        
+
         var enemy = new Enemy(pos.x, pos.y, world, io, EnemyConfig.normal);
         io.addObj(enemy.body);
     });

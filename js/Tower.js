@@ -1,7 +1,8 @@
-function Tower(x, y, world, io, config) {
+function Tower(x, y, config) {
     this.config = config;
-    this.shape = new iio.Circle(vector, config.size);
-    this.shape.setFillStyle(config.color);
+
+    this.body = TD.createBox2DBody(x, y, config);
+    this.body.parent = this;
 
     this.fire = function(target) {
         new Projectile(this.config.projectile);
