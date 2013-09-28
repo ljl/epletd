@@ -33,6 +33,15 @@ EpleTD = function (io) {
     io.addObj(t.body);
 
 
+    // Contact listener
+    var listener = new Box2D.Dynamics.b2ContactListener;
+    listener.BeginContact = function(contact) {
+        console.log(contact.GetFixtureB().GetBody().parent);
+    };
+
+    world.SetContactListener(listener);
+
+
     io.canvas.addEventListener('mousedown', function (event) {
         var pos = map.getCellCenter(io.getEventPosition(event));
 
