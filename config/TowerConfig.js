@@ -1,6 +1,6 @@
 TowerConfig = {
     "basic": {
-        "fireInterval": 2000,
+        "fireInterval": 500,
         "box2d": {
             "size": 10,
             "density": 0.5,
@@ -15,7 +15,9 @@ TowerConfig = {
             "damage": 10,
             "size": 2,
             "color": "black",
+            "speed": 20,
             "box2d": {
+                "mass": 0.1,
                 "size": 2,
                 "density": 0.5,
                 "damping": 0.1,
@@ -23,7 +25,7 @@ TowerConfig = {
                 "restitution": 0.1,
                 "shape": "circle",
                 "color": "black",
-                "type": "kinematic"
+                "type": "dynamic"
             }
 
         }

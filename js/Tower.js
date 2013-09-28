@@ -11,7 +11,6 @@ function Tower(x, y, config) {
         // Test if fire is off cooldown.
         var currentTime = new Date().getTime();
         if ((currentTime - this.lastShot) >= this.fireInterval) {
-            console.log('We can fire!');
             this.fire();
             this.lastShot = currentTime;
         }
@@ -32,13 +31,8 @@ function Tower(x, y, config) {
             }
         });
         if (closestEnemy) {
-            var projectile = new Projectile(x, y, this.config.projectile, closestEnemy);
+            var projectile = new Projectile(x, y, this.config.projectile, closestEnemy.parent);
             TD.io.addToGroup('projectiles', projectile.body);
-            console.log('OHOY, SHOTS FIRED!');
         }
     };
-}
-
-function getDistance(x1, y1, x2, y2) {
-    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }

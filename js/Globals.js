@@ -17,6 +17,7 @@ var TD = {
         fixDef.density = config.density;
         fixDef.friction = config.friction;
         fixDef.restitution = config.restitution;
+        fixDef.mass = config.mass;
 
         switch (config.shape) {
         case 'circle':
@@ -61,4 +62,19 @@ function toMeters(val) {
 
 function toPixels(val) {
     return val * 30;
+}
+
+function getDistance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
+
+function getNormalizedVector(x1, y1, x2, y2) {
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+    var xyratio = dx / dy;
+    var angle = Math.atan2(dy, dx);
+    return {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
 }

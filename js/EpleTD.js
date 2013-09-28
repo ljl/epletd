@@ -30,6 +30,11 @@ EpleTD = function (io) {
         towers.forEach(function(tower){
             tower.parent.update();
         });
+
+        var projectiles = TD.io.getGroup('projectiles');
+        projectiles.forEach(function(projectile){
+            projectile.parent.update();
+        });
     });
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
@@ -45,7 +50,7 @@ EpleTD = function (io) {
     // Contact listener
     var listener = new Box2D.Dynamics.b2ContactListener;
     listener.BeginContact = function(contact) {
-        console.log(contact.GetFixtureB().GetBody().parent);
+        //console.log(contact.GetFixtureB().GetBody().parent);
     };
 
     world.SetContactListener(listener);
