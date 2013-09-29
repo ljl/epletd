@@ -3,6 +3,7 @@ function Tower(x, y, config) {
     this.fireInterval = config.fireInterval;
     this.range = config.range;
     this.lastShot = new Date().getTime();
+    this.dead = false;
 
 
     this.body = TD.createBox2DBody(x, y, config.box2d);
@@ -15,6 +16,11 @@ function Tower(x, y, config) {
             this.fire();
             this.lastShot = currentTime;
         }
+    }
+
+    this.kill = function() {
+        this.dead = true;
+        // *sadface*
     }
 
     this.fire = function() {
@@ -38,5 +44,12 @@ function Tower(x, y, config) {
             var projectile = new Projectile(x, y, this.config.projectile, closestEnemy.parent);
             TD.io.addToGroup('projectiles', projectile.body);
         }
-    };
+    }
+
+    this.cleanup = function() {
+        if (this.dead) {
+            TD.world.DestroyBody(this.body);
+            TD.io.rmvObj(this.body);
+        }
+    }
 }

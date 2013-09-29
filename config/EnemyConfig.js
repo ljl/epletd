@@ -4,6 +4,8 @@ EnemyConfig = {
         "reward": 5,
         "penalty": 5,
         "health": 100,
+        "explosionTime": 1000 * 10,
+        "explosionRadius": 80,
         "box2d": {
             "mass": 200,
             "size": 16,

@@ -82,6 +82,11 @@ EpleTD = function (io) {
         enemies.forEach(function (enemy) {
             enemy.parent.cleanup();
         });
+
+        var towers = TD.io.getGroup('towers');
+        towers.forEach(function (tower) {
+            tower.parent.cleanup();
+        });
     });
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
