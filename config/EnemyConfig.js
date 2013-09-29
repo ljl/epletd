@@ -1,13 +1,13 @@
 EnemyConfig = {
     "normal": {
         "name": "Normal",
-        "reward": 5,
+        "reward": 10,
         "penalty": 5,
         "health": 100,
         "explosionTime": 1000 * 10,
         "explosionRadius": 80,
         "box2d": {
-            "ySpeed": 10,
+            "ySpeed": 1,
             "mass": 200,
             "size": 12,
             "density": 0.5,

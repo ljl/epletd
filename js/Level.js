@@ -23,4 +23,12 @@ function Level(config) {
             TD.io.rmvFromGroup(me.text, 'GUI');
         },this.levelTime)
     }
+
+    this.complete = function(lastLevel) {
+        var levelCompleteText = new iio.Text('Level ' + this.level + ' complete');
+        TD.io.addToGroup('GUI', levelCompleteText);
+        setTimeout(function() {
+
+        });
+    }
 }
