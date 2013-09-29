@@ -16,11 +16,8 @@ function Enemy(x, y, config) {
         this.health -= damage;
 
         // return true if this damage was the killing blow
-        if (this.health <= 0 && this.health + damage > 0) {
-            return true;
-        }
-        return false;
-    }
+        return this.health <= 0 && this.health + damage > 0;
+    };
 
     this.update = function() {
         var currentTime = new Date().getTime();
@@ -52,13 +49,13 @@ function Enemy(x, y, config) {
         }
 
         this.applyDamage(25061986);
-    }
+    };
 
     this.cleanup = function() {
         if (this.health <= 0) {
             remove();
         }
-    }
+    };
 
     function remove() {
         TD.world.DestroyBody(me.body);
@@ -70,12 +67,12 @@ function Enemy(x, y, config) {
             this.applyDamage(25061986);
             TD.resource.update(-this.penalty);
         }
-    }
+    };
 
     this.killed = function() {
         console.log("killed");
         TD.resource.update(this.reward);
-    }
+    };
 
     var me = this;
 }

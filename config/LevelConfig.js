@@ -16,5 +16,11 @@ LevelConfig = [
         level: 3,
         spawnTime: 300,
         startDelay: 2000
+    },
+    {
+        levelTime: 15000,
+        level: 4,
+        spawnTime: 100,
+        startDelay: 1000
     }
 ];
