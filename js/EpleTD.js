@@ -50,7 +50,7 @@ EpleTD = function (io) {
         });
     });
 
-    setInterval(function() {
+    setInterval(function () {
         var projectiles = TD.io.getGroup('projectiles');
         projectiles.forEach(function (projectile) {
             projectile.parent.cleanup();
@@ -78,10 +78,12 @@ EpleTD = function (io) {
     io.addToGroup('towers', t.body);
 
     // Spawn enemies
-    io.setFramerate(1, function() {
-        var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols/3), MapConfig.cell.y, EnemyConfig.normal);
+
+
+    setInterval(function () {
+        var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols / 3), MapConfig.cell.y, EnemyConfig.normal);
         io.addToGroup('enemies', enemy.body);
-    });
+    }, 700);
 
 
     // Contact listener
@@ -109,7 +111,7 @@ EpleTD = function (io) {
 
     world.SetContactListener(listener);
 
-    window.addEventListener('keydown', function(event){
+    window.addEventListener('keydown', function (event) {
         if (iio.keyCodeIs('1', event)) {
             TD.placingTower = true;
             TD.currentTower = TowerConfig.normal;
