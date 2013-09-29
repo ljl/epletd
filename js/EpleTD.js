@@ -121,10 +121,13 @@ EpleTD = function (io) {
     });
 
     io.canvas.addEventListener('mousedown', function (event) {
-        var pos = map.getCellCenter(io.getEventPosition(event));
+        var cell = map.getCellAt(io.getEventPosition(event));
 
-        var enemy = new Enemy(pos.x, pos.y, EnemyConfig.normal);
-        io.addToGroup('enemies', enemy.body);
+        if (cell.hasBuilding == true) {
+            var pos = map.getCellCenter(io.getEventPosition(event));
+            var tower = new Tower(pos.x, pos.y, TD.currentTower);
+            io.addToGroup('towers', tower.body);
+        }
     });
 
     io.canvas.addEventListener('mousemove', function (event) {
