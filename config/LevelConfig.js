@@ -3,28 +3,35 @@ LevelConfig = [
         levelTime: 5000,
         level: 1,
         spawnTime: 700,
-        startDelay: 5000,
+        startDelay: 8000,
+        enemyConfig: EnemyConfig.normal
+    },
+    {
+        levelTime: 5000,
+        level: 2,
+        spawnTime: 300,
+        startDelay: 3000,
         enemyConfig: EnemyConfig.bouncy
     },
     {
-        levelTime: 7000,
-        level: 2,
-        spawnTime: 500,
+        levelTime: 5000,
+        level: 3,
+        spawnTime: 350,
         startDelay: 3000,
         enemyConfig: EnemyConfig.normal
     },
     {
-        levelTime: 10000,
-        level: 3,
-        spawnTime: 300,
-        startDelay: 2000,
-        enemyConfig: EnemyConfig.normal
+        levelTime: 8000,
+        level: 4,
+        spawnTime: 180,
+        startDelay: 3000,
+        enemyConfig: EnemyConfig.bouncy
     },
     {
-        levelTime: 15000,
-        level: 4,
-        spawnTime: 100,
-        startDelay: 1000,
+        levelTime: 8000,
+        level: 5,
+        spawnTime: 150,
+        startDelay: 3000,
         enemyConfig: EnemyConfig.normal
     }
 ];
