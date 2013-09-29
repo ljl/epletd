@@ -15,7 +15,7 @@ EpleTD = function (io) {
     io.addObj(map.grid);
 
     // Create box2d world
-    var world = TD.world = new b2World(new b2Vec2(0, 3), true);
+    var world = TD.world = new b2World(new b2Vec2(0, MapConfig.gravity), true);
     io.addB2World(world);
 
     // Add groups
@@ -67,6 +67,7 @@ EpleTD = function (io) {
         });
     }, 17);
 
+    // Default towers
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
     io.addToGroup('towers', t.body);
     t = new Tower(32 * 6 - 15, 32 * 6 - 15, TowerConfig.basic);
@@ -76,7 +77,11 @@ EpleTD = function (io) {
     t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.sniper);
     io.addToGroup('towers', t.body);
 
-    // Set walls etc
+    // Spawn enemies
+    io.setFramerate(1, function() {
+        var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols/3), MapConfig.cell.y, EnemyConfig.normal);
+        io.addToGroup('enemies', enemy.body);
+    });
 
 
     // Contact listener

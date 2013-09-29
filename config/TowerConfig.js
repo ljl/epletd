@@ -47,7 +47,7 @@ TowerConfig = {
             "type": "static"
         },
         "projectile": {
-            "damage": 50,
+            "damage": 40,
             "size": 2,
             "color": "red",
             "speed": 20,

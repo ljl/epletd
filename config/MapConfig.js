@@ -5,5 +5,6 @@ MapConfig = {
         "x": 32,
         "y": 32
     },
-    startingGold: 10
+    "startingGold" : 10,
+    "gravity": 4
 };
