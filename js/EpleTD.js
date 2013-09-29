@@ -147,12 +147,22 @@ function startLevel() {
     var currentLevelConfig = LevelConfig[TD.currentLevel];
     if (currentLevelConfig) {
         setTimeout(function () {
-            new Level(currentLevelConfig).start();
+            var thisLevel = new Level(currentLevelConfig).start();
             TD.currentLevel++;
             setTimeout(function () {
+                thisLevel.complete();
                 startLevel();
             }, currentLevelConfig.levelTime);
         }, currentLevelConfig.startDelay);
+    } else {
+        setTimeout(function () {
+            var scoreText = new iio.Text('Your final score is ' + TD.resource.money,
+                (MapConfig.cell.x * MapConfig.cols) / 3, 150)
+                .setFont('30px Consolas')
+                .setFillStyle('black');
+            TD.io.addToGroup('GUI', scoreText);
+        }, 10000)
+
     }
 }
 
