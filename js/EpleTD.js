@@ -22,38 +22,17 @@ EpleTD = function (io) {
     io.addGroup('enemies', 1);
     io.addGroup('towers', 2);
     io.addGroup('projectiles', 3);
-    io.addGroup('wall', 3);
+    io.addGroup('walls', 3);
+    io.addGroup('GUI', 5);
 
+    // Create resource text
+    initResources();
 
     // Create walls
-    var wall = TD.createBox2DBody(MapConfig.cell.x/2, 0, {
-        "shape": "wall",
-        "type": "static",
-        "width": MapConfig.cell.x/2,
-        "height": MapConfig.cell.y * MapConfig.rows,
-        "color": "grey"
-    });
-    io.addToGroup('wall', wall);
-
-    wall = TD.createBox2DBody((MapConfig.cell.x * MapConfig.cols) - MapConfig.cell.x/2, 0, {
-        "shape": "wall",
-        "type": "static",
-        "width": MapConfig.cell.x/2,
-        "height": MapConfig.cell.y * MapConfig.rows,
-        "color": "grey"
-    });
-    io.addToGroup('wall', wall);
-
-    wall = TD.createBox2DBody(0, (MapConfig.cell.y * MapConfig.rows/2), {
-        "shape": "wall",
-        "type": "static",
-        "width": (MapConfig.cell.x * MapConfig.cols),
-        "height": MapConfig.cell.y/2,
-        "color": "grey"
-    });
-    io.addToGroup('wall', wall);
+    createWalls();
 
 
+    // Loop
     io.setB2Framerate(60, function () {
         //code called 60x a second
         var towers = TD.io.getGroup('towers');
@@ -72,7 +51,7 @@ EpleTD = function (io) {
         });
     });
 
-    io.setFramerate(60, function() {
+    io.setFramerate(60, function () {
         var projectiles = TD.io.getGroup('projectiles');
         projectiles.forEach(function (projectile) {
             projectile.parent.cleanup();
@@ -110,13 +89,29 @@ EpleTD = function (io) {
         var classA = fixA.GetBody().parent;
         var classB = fixB.GetBody().parent;
         if (classA && classB) {
+            // If projectile hits enemy
             if (classA.type == 'projectile' && classB.type == 'enemy') {
                 classA.hit(classB);
             }
             if (classA.type == 'enemy' && classB.type == 'projectile') {
                 classB.hit(classA);
             }
+
+            // If projectile hits bottom
+            if (classA.type == 'wall' && classB.type == 'enemy') {
+                if (classA.name == 'bottom') {
+                    console.log('hit rock bottom');
+                    enemyCompleted(classB);
+                }
+            }
+            if (classB.type == 'wall' && classA.type == 'enemy') {
+                if (classB.name == 'bottom') {
+                    console.log('hit rock bottom');
+                    enemyCompleted(classA);
+                }
+            }
         }
+
 
     };
 
@@ -130,6 +125,23 @@ EpleTD = function (io) {
         io.addToGroup('enemies', enemy.body);
     });
 };
+
+function enemyCompleted(enemy) {
+    enemy.done();
+    TD.resource.update(-enemy.penalty);
+}
+
+function createWalls() {
+    WallConfig.forEach(function (wallConf) {
+        var w = new Wall(wallConf);
+        TD.io.addToGroup('walls', w.body);
+    });
+}
+
+function initResources() {
+    TD.resource = new Resource();
+    TD.resource.update(0);
+}
 
 
 iio.start(EpleTD);

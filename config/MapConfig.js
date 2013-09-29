@@ -4,5 +4,6 @@ MapConfig = {
     "cell": {
         "x": 32,
         "y": 32
-    }
-}
+    },
+    startingGold: 10
+};

@@ -50,8 +50,18 @@ function Enemy(x, y, config) {
 
     this.cleanup = function() {
         if (this.health <= 0) {
-            TD.world.DestroyBody(this.body);
-            TD.io.rmvObj(this.body);
+            remove();
         }
     }
+
+    this.done = function() {
+        remove();
+    };
+
+    function remove() {
+        TD.world.DestroyBody(me.body);
+        TD.io.rmvObj(me.body);
+    }
+
+    var me = this;
 }

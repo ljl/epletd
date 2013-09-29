@@ -12,6 +12,7 @@ var TD = {
     io: {},
     world: {},
     map: {},
+    resource: {},
     createBox2DBody: function (x, y, config, filter) {
         var fixDef = new b2FixtureDef;
         fixDef.density = config.density;
