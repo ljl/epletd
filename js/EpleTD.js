@@ -50,7 +50,7 @@ EpleTD = function (io) {
         });
     });
 
-    io.setFramerate(60, function () {
+    setInterval(function() {
         var projectiles = TD.io.getGroup('projectiles');
         projectiles.forEach(function (projectile) {
             projectile.parent.cleanup();
@@ -65,7 +65,7 @@ EpleTD = function (io) {
         towers.forEach(function (tower) {
             tower.parent.cleanup();
         });
-    });
+    }, 17);
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
     io.addToGroup('towers', t.body);
@@ -106,11 +106,11 @@ EpleTD = function (io) {
 
     window.addEventListener('keydown', function(event){
         if (iio.keyCodeIs('1', event)) {
-            TD.placeTower = true;
+            TD.placingTower = true;
             TD.currentTower = TowerConfig.normal;
         }
         if (iio.keyCodeIs('2', event)) {
-            TD.placeTower = true;
+            TD.placingTower = true;
             TD.currentTower = TowerConfig.sniper;
         }
     });
@@ -120,6 +120,13 @@ EpleTD = function (io) {
 
         var enemy = new Enemy(pos.x, pos.y, EnemyConfig.normal);
         io.addToGroup('enemies', enemy.body);
+    });
+
+    io.canvas.addEventListener('mousemove', function (event) {
+        if (TD.placingTower) {
+            var pos = map.getCellCenter(io.getEventPosition(event));
+            TD.towerIndicator.setPos(pos);
+        }
     });
 };
 
@@ -133,6 +140,9 @@ function createWalls() {
 function initResources() {
     TD.resource = new Resource();
     TD.resource.update(0);
+
+    TD.towerIndicator = new iio.Rect(50, 50, 32, 32).setFillStyle('rgba(0,0,0,0.1)');
+    TD.io.addToGroup('GUI', TD.towerIndicator);
 }
 
 

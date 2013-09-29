@@ -14,7 +14,6 @@ function Tower(x, y, config) {
         var currentTime = new Date().getTime();
         if ((currentTime - this.lastShot) >= this.fireInterval) {
             this.fire();
-            this.lastShot = currentTime;
         }
     }
 
@@ -44,6 +43,9 @@ function Tower(x, y, config) {
             var projectile = new Projectile(x, y, this.config.projectile, closestEnemy.parent);
             TD.io.addToGroup('projectiles', projectile.body);
         }
+
+        // Set timer for last shot
+        this.lastShot = new Date().getTime();
     }
 
     this.cleanup = function() {
