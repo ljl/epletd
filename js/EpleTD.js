@@ -121,7 +121,7 @@ EpleTD = function (io) {
     });
 
     io.canvas.addEventListener('mousedown', function (event) {
-        var cell = map.getCellAt(io.getEventPosition(event));
+        var cell = map.grid.getCellAt(io.getEventPosition(event));
 
         if (cell.hasBuilding == true) {
             var pos = map.getCellCenter(io.getEventPosition(event));
