@@ -33,9 +33,9 @@ TowerConfig = {
         }
     },
     "sniper": {
-        "price": 50,
-        "fireInterval": 1500,
-        "range": 500,
+        "price": 30,
+        "fireInterval": 3000,
+        "range": 360,
         "box2d": {
             "size": 16,
             "density": 0.5,
