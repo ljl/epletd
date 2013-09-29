@@ -109,7 +109,7 @@ EpleTD = function (io) {
     io.canvas.addEventListener('mousedown', function (event) {
         var cell = map.grid.getCellAt(io.getEventPosition(event));
 
-        if (!map.grid.cells[cell.x][cell.y].hasBuilding) {
+        if (TD.placingTower && !map.grid.cells[cell.x][cell.y].hasBuilding) {
             if (TD.resource.money >= TD.currentTower.price) {
                 var pos = map.getCellCenter(io.getEventPosition(event));
                 var tower = new Tower(pos.x, pos.y, TD.currentTower);
