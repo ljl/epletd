@@ -31,7 +31,6 @@ EpleTD = function (io) {
     // Create walls
     createWalls();
 
-
     // Loop
     io.setB2Framerate(60, function () {
         //code called 60x a second
@@ -117,6 +116,16 @@ EpleTD = function (io) {
 
     world.SetContactListener(listener);
 
+    window.addEventListener('keydown', function(event){
+        if (iio.keyCodeIs('1', event)) {
+            TD.placeTower = true;
+            TD.currentTower = TowerConfig.normal;
+        }
+        if (iio.keyCodeIs('2', event)) {
+            TD.placeTower = true;
+            TD.currentTower = TowerConfig.sniper;
+        }
+    });
 
     io.canvas.addEventListener('mousedown', function (event) {
         var pos = map.getCellCenter(io.getEventPosition(event));

@@ -14,6 +14,12 @@ function Enemy(x, y, config) {
 
     this.applyDamage = function(damage) {
         this.health -= damage;
+
+        // return true if this damage was the killing blow
+        if (this.health <= 0 && this.health + damage > 0) {
+            return true;
+        }
+        return false;
     }
 
     this.update = function() {

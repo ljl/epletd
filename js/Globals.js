@@ -13,6 +13,9 @@ var TD = {
     world: {},
     map: {},
     resource: {},
+    towerIndicator = null,
+    placingTower = false,
+    currentTower = null,
     createBox2DBody: function (x, y, config, filter) {
         var fixDef = new b2FixtureDef;
         fixDef.density = config.density;
