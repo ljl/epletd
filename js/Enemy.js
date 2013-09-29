@@ -12,6 +12,9 @@ function Enemy(x, y, config) {
     this.body = TD.createBox2DBody(x, y, config.box2d, {cat:2, mask:3});
     this.body.parent = this;
 
+    var velVec = new b2Vec2(0, config.box2d.ySpeed);
+    this.body.SetLinearVelocity(velVec);
+
     this.applyDamage = function(damage) {
         this.health -= damage;
 
