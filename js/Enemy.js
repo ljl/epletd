@@ -54,10 +54,6 @@ function Enemy(x, y, config) {
         }
     }
 
-    this.done = function() {
-        remove();
-    };
-
     function remove() {
         TD.world.DestroyBody(me.body);
         TD.io.rmvObj(me.body);

@@ -127,8 +127,10 @@ EpleTD = function (io) {
 };
 
 function enemyCompleted(enemy) {
-    enemy.done();
-    TD.resource.update(-enemy.penalty);
+    if (enemy.health > 0) {
+        enemy.applyDamage(25061986);
+        TD.resource.update(-enemy.penalty);
+    }
 }
 
 function createWalls() {
