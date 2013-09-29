@@ -67,16 +67,6 @@ EpleTD = function (io) {
         });
     }, 17);
 
-    // Default towers
-    var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
-    io.addToGroup('towers', t.body);
-    t = new Tower(32 * 6 - 15, 32 * 6 - 15, TowerConfig.basic);
-    io.addToGroup('towers', t.body);
-    t = new Tower(32 * 7 - 15, 32 * 7 - 15, TowerConfig.sniper);
-    io.addToGroup('towers', t.body);
-    t = new Tower(32 * 8 - 15, 32 * 8 - 15, TowerConfig.sniper);
-    io.addToGroup('towers', t.body);
-
     // Spawn enemies
 
 
@@ -114,7 +104,7 @@ EpleTD = function (io) {
     window.addEventListener('keydown', function (event) {
         if (iio.keyCodeIs('1', event)) {
             TD.placingTower = true;
-            TD.currentTower = TowerConfig.normal;
+            TD.currentTower = TowerConfig.basic;
         }
         if (iio.keyCodeIs('2', event)) {
             TD.placingTower = true;
@@ -125,11 +115,14 @@ EpleTD = function (io) {
     io.canvas.addEventListener('mousedown', function (event) {
         var cell = map.grid.getCellAt(io.getEventPosition(event));
 
-        if (cell.hasBuilding != true) {
-            var pos = map.getCellCenter(io.getEventPosition(event));
-            var tower = new Tower(pos.x, pos.y, TD.currentTower);
-            io.addToGroup('towers', tower.body);
-            cell.hasBuilding = true;
+        if (!map.grid.cells[cell.x][cell.y].hasBuilding) {
+            if (TD.resource.money >= TD.currentTower.price) {
+                var pos = map.getCellCenter(io.getEventPosition(event));
+                var tower = new Tower(pos.x, pos.y, TD.currentTower);
+                io.addToGroup('towers', tower.body);
+                map.grid.cells[cell.x][cell.y].hasBuilding = true;
+                TD.resource.update(-TD.currentTower.price);
+            }
         }
     });
 

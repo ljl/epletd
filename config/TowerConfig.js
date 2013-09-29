@@ -1,7 +1,7 @@
 TowerConfig = {
     "basic": {
         "price": 10,
-        "fireInterval": 500,
+        "fireInterval": 1000,
         "range": 200,
         "box2d": {
             "size": 16,
@@ -34,7 +34,7 @@ TowerConfig = {
     },
     "sniper": {
         "price": 50,
-        "fireInterval": 1200,
+        "fireInterval": 1500,
         "range": 500,
         "box2d": {
             "size": 16,
@@ -47,7 +47,7 @@ TowerConfig = {
             "type": "static"
         },
         "projectile": {
-            "damage": 40,
+            "damage": 20,
             "size": 2,
             "color": "red",
             "speed": 20,

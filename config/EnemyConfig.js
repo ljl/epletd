@@ -12,7 +12,7 @@ EnemyConfig = {
             "density": 0.5,
             "damping": 0.1,
             "friction": 0.1,
-            "restitution": 0.9,
+            "restitution": 0.5,
             "shape": "circle",
             "color": "blue",
             "type": "dynamic"
