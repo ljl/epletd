@@ -13,6 +13,8 @@ var TD = {
     world: {},
     map: {},
     resource: {},
+    level: {},
+    currentLevel: 0,
     towerIndicator: null,
     placingTower: false,
     currentTower: null,

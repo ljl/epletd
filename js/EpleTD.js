@@ -68,13 +68,7 @@ EpleTD = function (io) {
     }, 17);
 
     // Spawn enemies
-
-
-    setInterval(function () {
-        var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols / 3), MapConfig.cell.y, EnemyConfig.normal);
-        io.addToGroup('enemies', enemy.body);
-    }, 700);
-
+    startLevel();
 
     // Contact listener
     var listener = new Box2D.Dynamics.b2ContactListener;
@@ -147,6 +141,19 @@ function initResources() {
 
     TD.towerIndicator = new iio.Rect(50, 50, 32, 32).setFillStyle('rgba(0,0,0,0.1)');
     TD.io.addToGroup('GUI', TD.towerIndicator);
+}
+
+function startLevel() {
+    var currentLevelConfig = LevelConfig[TD.currentLevel];
+    if (currentLevelConfig) {
+        setTimeout(function () {
+            new Level(currentLevelConfig).start();
+            TD.currentLevel++;
+            setTimeout(function () {
+                startLevel();
+            }, currentLevelConfig.levelTime);
+        }, currentLevelConfig.startDelay);
+    }
 }
 
 
