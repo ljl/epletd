@@ -4,6 +4,7 @@ function Enemy(x, y, config) {
     this.reward      = config.reward;
     this.penalty     = config.penalty;
     this.health      = config.health;
+    this.mainColor = config.box2d.color;
     this.spawnTime   = new Date().getTime();
     this.explosionTime = config.explosionTime;
     this.explosionRadius = config.explosionRadius;
@@ -20,6 +21,12 @@ function Enemy(x, y, config) {
         var diff = currentTime - this.spawnTime;
         if (diff > this.explosionTime) {
             this.explode();
+        }
+
+        // Turn border red 3 seconds before explosion
+        if (diff > this.explosionTime - 1000 * 3) {
+            var fixtures = this.body.GetFixtureList();
+            fixtures.GetShape().setStrokeStyle('red').setLineWidth(2);
         }
     }
 
