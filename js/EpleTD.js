@@ -139,7 +139,7 @@ function initResources() {
     TD.resource = new Resource();
     TD.resource.update(0);
 
-    TD.towerIndicator = new iio.Rect(50, 50, 32, 32).setFillStyle('rgba(0,0,0,0.1)');
+    TD.towerIndicator = new iio.Rect(-50, -50, 32, 32).setFillStyle('rgba(0,0,0,0.1)');
     TD.io.addToGroup('GUI', TD.towerIndicator);
 }
 

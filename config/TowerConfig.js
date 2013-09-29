@@ -2,7 +2,7 @@ TowerConfig = {
     "basic": {
         "price": 10,
         "fireInterval": 1000,
-        "range": 200,
+        "range": 120,
         "box2d": {
             "size": 16,
             "density": 0.5,
@@ -47,7 +47,7 @@ TowerConfig = {
             "type": "static"
         },
         "projectile": {
-            "damage": 20,
+            "damage": 30,
             "size": 2,
             "color": "red",
             "speed": 20,
