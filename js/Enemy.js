@@ -20,7 +20,6 @@ function Enemy(x, y, config) {
         if (this.health <= 0) {
             TD.world.DestroyBody(this.body);
             TD.io.rmvObj(this.body);
-            console.log('i died =(')
         }
     }
 }

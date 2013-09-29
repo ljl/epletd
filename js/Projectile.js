@@ -34,12 +34,14 @@ function Projectile(x, y, config, targetEnemy) {
     }
 
     this.hit = function(enemy) {
-        var pos = this.body.GetPosition();
-        var ePos = enemy.body.GetPosition();
+        if (!this.dead) {
+            var pos = this.body.GetPosition();
+            var ePos = enemy.body.GetPosition();
 
-        if (getDistance(toPixels(pos.x), toPixels(pos.y), toPixels(ePos.x), toPixels(ePos.y)) < 20) {
-            enemy.applyDamage(this.damage);
-            this.dead = true;
+            if (getDistance(toPixels(pos.x), toPixels(pos.y), toPixels(ePos.x), toPixels(ePos.y)) < 20) {
+                enemy.applyDamage(this.damage);
+                this.dead = true;
+            }
         }
     }
 }
