@@ -4,6 +4,7 @@ function Projectile(x, y, config, targetEnemy) {
     this.targetEnemy = targetEnemy;
     this.speed = config.speed;
     this.damage = config.damage;
+    this.dead = false;
 
     this.body = TD.createBox2DBody(x, y, config.box2d, {cat: 1, mask: 2});
     this.body.parent = this;
@@ -25,8 +26,20 @@ function Projectile(x, y, config, targetEnemy) {
         this.body.SetLinearVelocity(velocity);
     };
 
+    this.cleanup = function() {
+        if (this.dead) {
+            TD.world.DestroyBody(this.body);
+            TD.io.rmvObj(this.body);
+        }
+    }
+
     this.hit = function(enemy) {
-        enemy.applyDamage(this.damage);
-        TD.io.rmvObj(this.body);
+        var pos = this.body.GetPosition();
+        var ePos = enemy.body.GetPosition();
+
+        if (getDistance(toPixels(pos.x), toPixels(pos.y), toPixels(ePos.x), toPixels(ePos.y)) < 20) {
+            enemy.applyDamage(this.damage);
+            this.dead = true;
+        }
     }
 }

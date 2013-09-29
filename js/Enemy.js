@@ -10,8 +10,17 @@ function Enemy(x, y, config) {
 
     this.applyDamage = function(damage) {
         this.health -= damage;
+    }
+
+    this.update = function() {
+
+    }
+
+    this.cleanup = function() {
         if (this.health <= 0) {
+            TD.world.DestroyBody(this.body);
             TD.io.rmvObj(this.body);
+            console.log('i died =(')
         }
     }
 }

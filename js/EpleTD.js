@@ -65,6 +65,23 @@ EpleTD = function (io) {
         projectiles.forEach(function (projectile) {
             projectile.parent.update();
         });
+
+        var enemies = TD.io.getGroup('enemies');
+        enemies.forEach(function (enemy) {
+            enemy.parent.update();
+        });
+    });
+
+    io.setFramerate(60, function() {
+        var projectiles = TD.io.getGroup('projectiles');
+        projectiles.forEach(function (projectile) {
+            projectile.parent.cleanup();
+        });
+
+        var enemies = TD.io.getGroup('enemies');
+        enemies.forEach(function (enemy) {
+            enemy.parent.cleanup();
+        });
     });
 
     var t = new Tower(32 * 5 - 15, 32 * 5 - 15, TowerConfig.basic);
