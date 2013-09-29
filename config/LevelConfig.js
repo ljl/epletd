@@ -4,7 +4,7 @@ LevelConfig = [
         level: 1,
         spawnTime: 700,
         startDelay: 5000,
-        enemyConfig: EnemyConfig.normal
+        enemyConfig: EnemyConfig.bouncy
     },
     {
         levelTime: 7000,

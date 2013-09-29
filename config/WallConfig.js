@@ -23,11 +23,11 @@ var WallConfig =
         {
             "name": "bottom",
             "startX": 0,
-            "startY": (MapConfig.cell.y * MapConfig.rows / 1.7),
+            "startY": (MapConfig.cell.y * MapConfig.rows / 1.6),
             "shape": "wall",
             "type": "static",
             "width": (MapConfig.cell.x * MapConfig.cols),
-            "height": MapConfig.cell.y / 2,
+            "height": MapConfig.cell.y,
             "color": "grey"
 
         },
