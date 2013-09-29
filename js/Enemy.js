@@ -27,7 +27,6 @@ function Enemy(x, y, config) {
         var x = toPixels(this.body.GetPosition().x);
         var y = toPixels(this.body.GetPosition().y);
 
-
         var towers = TD.io.getGroup('towers');
         for (var i = 0; i < towers.length; i++) {
             var tx = toPixels(towers[i].GetPosition().x);
@@ -36,9 +35,10 @@ function Enemy(x, y, config) {
             if (distance <= this.explosionRadius) {
                 // BOOM
                 towers[i].parent.kill();
-                this.applyDamage(25061986);
             }
         }
+
+        this.applyDamage(25061986);
     }
 
     this.cleanup = function() {
