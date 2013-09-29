@@ -125,10 +125,11 @@ EpleTD = function (io) {
     io.canvas.addEventListener('mousedown', function (event) {
         var cell = map.grid.getCellAt(io.getEventPosition(event));
 
-        if (cell.hasBuilding == true) {
+        if (cell.hasBuilding != true) {
             var pos = map.getCellCenter(io.getEventPosition(event));
             var tower = new Tower(pos.x, pos.y, TD.currentTower);
             io.addToGroup('towers', tower.body);
+            cell.hasBuilding = true;
         }
     });
 
