@@ -7,6 +7,7 @@ var b2Vec2 = Box2D.Common.Math.b2Vec2
     , b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 
 EpleTD = function (io) {
+    alert('GeoDefence...\nBuild towers with 1 (10$) and 2 (30$)\nDon\'t let the stuff hit the floor\nStuff may explode...');
     // Make io accessible to all classes
     TD.io = io;
 
