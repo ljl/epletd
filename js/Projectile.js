@@ -39,8 +39,12 @@ function Projectile(x, y, config, targetEnemy) {
             var ePos = enemy.body.GetPosition();
 
             if (getDistance(toPixels(pos.x), toPixels(pos.y), toPixels(ePos.x), toPixels(ePos.y)) < 20) {
-                enemy.applyDamage(this.damage);
+                var killed = enemy.applyDamage(this.damage);
                 this.dead = true;
+                // If I killed enemy, call enemyKilled
+                if (killed) {
+                    enemy.killed();
+                }
             }
         }
     }

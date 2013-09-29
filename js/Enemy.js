@@ -65,5 +65,17 @@ function Enemy(x, y, config) {
         TD.io.rmvObj(me.body);
     }
 
+    this.completed = function() {
+        if (this.health > 0) {
+            this.applyDamage(25061986);
+            TD.resource.update(-this.penalty);
+        }
+    }
+
+    this.killed = function() {
+        console.log("killed");
+        TD.resource.update(this.reward);
+    }
+
     var me = this;
 }

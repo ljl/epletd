@@ -87,31 +87,19 @@ EpleTD = function (io) {
         var fixB = contact.GetFixtureB();
         var classA = fixA.GetBody().parent;
         var classB = fixB.GetBody().parent;
-        if (classA && classB) {
-            // If projectile hits enemy
-            if (classA.type == 'projectile' && classB.type == 'enemy') {
-                classA.hit(classB);
-            }
-            if (classA.type == 'enemy' && classB.type == 'projectile') {
-                classB.hit(classA);
-            }
+        var enemy = (classA.type == 'enemy' ? classA : (classB.type == 'enemy' ? classB : null));
+        var projectile = (classA.type == 'projectile' ? classA : (classB.type == 'projectile' ? classB : null));
+        var wall = (classA.type == 'wall' ? classA : (classB.type == 'wall' ? classB : null));
 
-            // If projectile hits bottom
-            if (classA.type == 'wall' && classB.type == 'enemy') {
-                if (classA.name == 'bottom') {
-                    console.log('hit rock bottom');
-                    enemyCompleted(classB);
-                }
-            }
-            if (classB.type == 'wall' && classA.type == 'enemy') {
-                if (classB.name == 'bottom') {
-                    console.log('hit rock bottom');
-                    enemyCompleted(classA);
-                }
-            }
+        if (enemy && projectile) {
+            projectile.hit(enemy);
         }
 
-
+        if (wall && enemy) {
+            if (wall.name == 'bottom') {
+                enemy.completed();
+            }
+        }
     };
 
     world.SetContactListener(listener);
@@ -134,13 +122,6 @@ EpleTD = function (io) {
         io.addToGroup('enemies', enemy.body);
     });
 };
-
-function enemyCompleted(enemy) {
-    if (enemy.health > 0) {
-        enemy.applyDamage(25061986);
-        TD.resource.update(-enemy.penalty);
-    }
-}
 
 function createWalls() {
     WallConfig.forEach(function (wallConf) {
