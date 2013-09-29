@@ -8,7 +8,7 @@ EnemyConfig = {
         "explosionRadius": 80,
         "box2d": {
             "mass": 200,
-            "size": 16,
+            "size": 14,
             "density": 0.5,
             "damping": 0.1,
             "friction": 0.1,

@@ -12,7 +12,7 @@ function Level(config) {
         var me = this;
         this.text.setText('Level ' + this.level);
         this.levelIntervalId = setInterval(function () {
-            var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols / 3), MapConfig.cell.y, EnemyConfig.normal);
+            var enemy = new Enemy((MapConfig.cell.x * MapConfig.cols / 2), MapConfig.cell.y, EnemyConfig.normal);
             TD.io.addToGroup('enemies', enemy.body);
         }, this.spawnTime);
 
